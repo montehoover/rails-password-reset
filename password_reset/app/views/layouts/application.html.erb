@@ -23,13 +23,19 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'Signup', '' %></li>
-          <li><%= link_to 'Login', '' %></li>
-          <li><%= link_to 'Logout', '' %></li>
+          <% if @current_user %>
+            <li><p class="navbar-text">Signed in as <%= @current_user.name %></p></li>
+            <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to 'Signup', users_path %></li>
+            <li><%= link_to 'Login', login_path %></li>
+          <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
   </nav>
+
+  <%= render 'layouts/flash' %>
 
   <div class="container">
     <%= yield %>
